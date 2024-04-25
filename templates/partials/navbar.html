@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'navbar/css/navbar.css'%}">
+{% endblock 'head' %}
+{% block 'body' %}
+    <div class="sidebar">
+        <div class='logo-container'>
+            <h2 class='logo'>Fitgram</h2>
+        </div>
+
+        <div class='navbar'>
+            <ul>
+                <li><span class="material-symbols-outlined">home</span><a href="#">Página inicial</a></li>
+                <li id="criar"><span class="material-symbols-outlined">add_to_photos</span><a href="#">Criar</a></li>
+                <li><img class="profile-icon" src="{{user_profile.foto_perfil.url}}"> <a href="#">Perfil</a></li> 
+                <li><span class="material-symbols-outlined">logout</span><a href="{% url "logout" %}">Sair</a></li> 
+            </ul>
+        </div>
+
+    <section class="modal-container"  id="modal_criar">
+        <div class="modal_criar">
+            <form action="{% url "home" %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class='modal_criar_header'>
+                    <h2>Criar post</h2>
+                    <span id="modal_criar_close" class="material-symbols-outlined">close</span>
+                </div>
+                <input type="text" name="title" placeholder="Título">
+                <input type="text" name="subtitle" placeholder="Legenda">
+                <input type="text" name="location" placeholder="Localização">
+                <input type="file" id="photo-input" name="photo" placeholder"Selecione sua imagem">
+                <img id="preview-image" src="#" alt="Preview da imagem" style="display: none; width: 400px; height:300px; object-fit:cover;  margin: 0 auto;">
+                <img id="preview-before-image" src="{% static "img/fundo-branco.jpg" %}" alt="Preview da imagem" style="display: block; width: 400px; height:300px; object-fit:cover;  margin: 0 auto;">
+                <button type="submit">Criar</button>
+            </form>
+        </div>
+    </section>
+    </div>
+    <script src={% static "navbar/js/modal_criar.js" %} />
+{% endblock 'body' %}

@@ -1,0 +1,111 @@
+.sidebar{
+    width:15%;
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    border-right:1px solid #000;
+    padding:1rem;
+    background-color:#fff;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.navbar{
+    margin: 2rem 0;
+    width: 100%;
+}
+.navbar ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap:10px;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+.navbar ul li{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    border-radius:10px;
+}
+.navbar ul li:hover{
+    background-color: #eee;
+    min-width:100%;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.profile-icon{
+    border-radius: 50px;
+    width: 24px;
+    height: 24px;
+}
+.modal-container{
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.modal_criar{
+    background: #fff;
+    padding:2rem;
+    border-radius: 10px;
+}
+
+.modal_criar_header{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.modal_criar_header span{
+    cursor:pointer;
+}
+
+.modal_criar form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.modal_criar form input{
+    padding: .5rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: #fafafa;
+    text-overflow: ellipsis;
+}
+
+.modal_criar form input:focus{
+    outline: 1px solid blue;
+}
+
+.modal_criar form button{
+    padding:.5rem;
+    border: none;
+    border-radius: 5px;
+    background: #4c9cf7;
+    color: white;
+    cursor: pointer;
+}

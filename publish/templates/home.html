@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static "publish/css/home.css" %}" >
+{% endblock 'head' %}
+{% block 'body' %}
+
+    <section class='home'>
+        
+       <div class="container_posts">
+        {% if messages %}
+        <br>
+        {% for message in messages %}
+            <section class="alert {{message.tags}}">
+                {{message}}
+            </section>
+        {% endfor %}
+        {% endif %}
+        {% if posts %}
+        {% for post in posts %}
+            <div class="card_posts">
+            <div class="card_posts_header">
+                <img src="{{post.user_post.foto_perfil.url}}" alt="img-profile"/>
+                <p class="card_posts_username">{{post.user_post.username}}</p>
+            </div>
+
+            <img class="img-principal-post" src="{{post.post_image.url}}" alt="post"/>
+
+            <div class="card_posts_footer">
+                <form action="{% url "add_like" post.id %}" method="POST">{% csrf_token %}
+                <input type="hidden" name="add_likes" value="add_likes"/>
+                <button type="submit"><a href="#"><span class="material-symbols-outlined {% for like in post.like_set.all %}{% if like.user_like == request.user %}{{ like.color_icon }}{% endif %}{% endfor %}">favorite</span></a></button>
+                </form>
+                <a href="#"><span class="material-symbols-outlined">chat_bubble</span></a>
+            </div>
+            {% if post.like_set.count == 0 %}
+                <span>sem curtida</span>
+            {% elif post.like_set.count == 1 %}
+                <span>{{post.like_set.count}} curtida</span>
+            {% else %}
+                <span>{{post.like_set.count}} curtidas</span>
+            {% endif %}
+
+            <div class="subtitle">
+                <p>{{post.subtitle}}</p>
+            </div>
+
+            <div class="comments">
+                <form action="{% url "add_comment" post.id %}" method="POST"/>{% csrf_token %}
+                    <input type=text placeholder="Adicione um comentário..." name="comment"/>
+                </form>
+            </div>
+        {% endfor %}
+        {% else %}
+        <p>Nenhum post encontrado</p>
+        {% endif %}
+       </div>
+    </section>
+{% include  "partials/navbar.html" %}
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static "js/scroll_reveal.js" %}"></script>
+    <script src="{% static "publish/js/likes.js" %}"</script>
+{% endblock 'body' %}
+
+

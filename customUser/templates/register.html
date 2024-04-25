@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'title' %}Cadastre-se{% endblock 'title' %}
+
+{% block 'head' %}<link rel="stylesheet" href="{% static "usuarios/css/login_cadastro.css" %}"/>{% endblock 'head' %}
+
+{% block 'body' %}
+        {% if messages %}
+        <br>
+        {% for message in messages %}
+            <section class="alert {{message.tags}}">
+                {{message}}
+            </section>
+        {% endfor %}
+        {% endif %}
+    <div class="container-login-cadastro register">
+        {% if messages %}
+        <br>
+        {% for message in messages %}
+            <section class="alert {{message.tags}}">
+                {{message}}
+            </section>
+        {% endfor %}
+        {% endif %}
+        <div class="container-box-login-cadastro">
+        <form action="{% url "register" %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 class="logo">Fitgram</h2>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="text" name="firstname" placeholder="Nome" required>
+            <input type="text" name="lastname" placeholder="Sobrenome" required>
+            <input type="text" name="username" placeholder="Nome de usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <input id="file-input" type="file" name="photo" placeholder="Foto de perfil" required>
+            <button type="submit">Entrar</button>
+            <div class="container-box-login-bottom">
+                Já tem uma conta?<a href="{% url "login" %}">Conectar-se</a>
+            </div>
+        </form>
+        <img id="imagepreview" src="#" alt="Preview da imagem" style="display: none; width: 300px; height:300px; object-fit:cover;  margin: 0 1rem; border-radius:10px;">
+        <img id="imagepreviewbefore" src="{% static "img/fundo-branco.jpg" %}" alt="Preview da imagem" style="display: block; width: 300px; height:300px; object-fit:cover;  margin: 0 1rem; border-radius:100%;">
+        </div>
+    </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static "js/scroll_reveal.js" %}"></script>
+    <script src={% static "usuarios/js/preview_image.js" %} />
+{% endblock 'body' %}
+
