@@ -1,0 +1,98 @@
+.profile{
+    margin-left:15%;
+    display: flex;
+    align-items:start;
+    justify-content:center; 
+    min-height:100vh;
+}
+
+.container_profile{
+    width:60%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 100px;
+}
+
+.container_profile_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:50px;
+}
+
+.container_profile_box img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.data_user{
+    display: flex;
+    flex-direction: column;
+}
+
+.data_user .username{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.data_user_row_two, data_user_row_three{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.container_user_posts{
+    width:100%;
+    border-top:1px solid #00000061;
+}
+
+.container_user_posts .options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    padding: .5rem 0;
+}
+
+.list_posts_user{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:5px;
+}
+
+.list_posts_user .post_card img{
+    width:100%;
+    height: 309px;
+    object-fit: cover;
+}
+.list_posts_user .post_card .data_post{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    gap: 50px;    
+    background: #000000a6;
+    height: 309px;
+    position: relative;
+    top: -19.4rem;        
+    display: none;
+    cursor: pointer;
+}
+.list_posts_user .post_card .data_post p{
+    display: flex;
+    align-items:center;
+    gap: 8px;
+    color:#fff;
+}
+
+.list_posts_user .post_card:hover .data_post{
+    display: flex;
+}
+
+.list_posts_user .post_card{
+    max-height: 309px;
+}

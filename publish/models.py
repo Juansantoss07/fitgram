@@ -7,7 +7,7 @@ class Posts(models.Model):
     subtitle = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     post_image = models.ImageField(upload_to='posts')
-    user_post = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    user_post = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now) 
     updated_at = models.DateTimeField(auto_now=True) 
 

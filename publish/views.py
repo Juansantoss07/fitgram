@@ -33,4 +33,13 @@ def home(request):
     return redirect('/publish/home')
 
 
+@login_required
+def delete_post(request, id_post):
+    if request.method == "POST":
+        post = Posts.objects.get(id=id_post)
+        post.delete()
+
+        messages.add_message(request, constants.SUCCESS, 'Post deletado com sucesso!')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    
     

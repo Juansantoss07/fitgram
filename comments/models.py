@@ -4,7 +4,7 @@ from customUser.models import Usuario
 from django.utils import timezone
 # Create your models here.
 class Comment(models.Model):
-    post = models.ForeignKey(Posts, on_delete=models.DO_NOTHING)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE)
     user_comment = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     comment = models.CharField(max_length=900)
     created_at = models.DateTimeField(default=timezone.now)

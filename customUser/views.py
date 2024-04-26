@@ -62,3 +62,16 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect('/usuarios/login')
+
+
+def profile(request, id_user):
+    if request.method == "GET":
+        try:
+            user = Usuario.objects.get(id=id_user)
+            # Obtém todos os posts do usuário ordenados por data de criação em ordem decrescente
+            posts = user.posts_set.all().order_by('-created_at')
+        except Usuario.DoesNotExist:
+            messages.add_message(request, messages.ERROR, 'Usuário não encontrado.')
+            return redirect('/usuarios/login')
+        
+        return render(request, 'profile.html', {'user': user, 'posts': posts})

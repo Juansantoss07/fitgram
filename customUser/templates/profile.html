@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static "usuarios/css/profile.css" %}"/>
+{% endblock 'head' %}
+
+{% block 'body' %}
+   {% include "partials/navbar.html" %}
+   <section class='profile'>
+
+       <div class="container_profile">
+
+           <div class="container_profile_box">
+                <img src="{{user.foto_perfil.url}}"/>
+                <div class="container_profile_box_content">
+                    <div class="data_user">
+                        <p class="username">{{user.username}}</p>
+                        <div class="data_user_row_two">
+                            <p><b>{{user.posts_set.count}}</b> publicações</p>
+                            <p><b>2</b> seguidores</p>
+                        </div>
+                        <div class="data_user_row_three">
+                            <p><b>{{user.first_name}} {{user.last_name}}</b></p>
+                        </div>
+                    </div>
+                </div>
+           </div>
+            <div class="container_user_posts">
+                {% if messages %}
+                <br>
+                {% for message in messages %}
+                    <section class="alert {{message.tags}}">
+                        {{message}}
+                     </section>
+                {% endfor %}
+                {% endif %}
+                <div class="options">
+                    <p>Publicações</p>
+                </div>
+
+                <div class="list_posts_user">
+                   {% for post in posts %}
+    <div class="post_card">
+        <img src="{{post.post_image.url}}" />
+
+        <div class="data_post modal_comment_open">
+            <p><span class="material-symbols-outlined">favorite</span>{{post.like_set.count}}</p>
+            <p><span class="material-symbols-outlined">chat_bubble</span>{{post.comment_set.count}}</p>
+        </div>
+    </div>
+
+    {% include "partials/modal_post.html" %}
+{% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock 'body' %}
