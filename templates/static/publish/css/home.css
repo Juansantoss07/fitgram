@@ -63,18 +63,18 @@ section.home{
 .card_posts_footer{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     justify-content: start;
     width: 100%;
     gap: 10px;
 }
 
-.card_posts_footer button{
+.card_posts_footer button, .comment_likes button{
     background: transparent;
     border: none;
 }
 
-.card_posts_footer a{
+.card_posts_footer a, .comment_likes a{
     color: #000;
 }
 
@@ -99,3 +99,91 @@ section.home{
     'FILL' 1
 }
 
+.modal_comment{ 
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    left: 0;
+    top: auto;
+    right: 0;
+    min-height:100vh;
+    display: none;
+}
+
+
+.modal_comment:target {
+    display: flex;
+}
+.modal_comment_container{
+    width: auto;
+    background: #fff;
+    margin: 0 auto;
+    display:flex;
+    align-items:start;
+    justify-content: space-between;
+    padding: 0;
+    gap:10px;
+    max-width:940px;
+    min-width: 55%;
+}
+
+.modal_comment_container img{
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.modal_comment_content{
+    padding:1rem 1.5rem 1rem .5rem;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal_comment_content_comment{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.modal_comment_content_comment img{
+    width: 30px;
+    height: 30px;
+    border-radius:50px;
+    object-fit: cover;
+}
+
+
+.modal_comment_header_right{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items:start;
+    justify-content: end;
+}
+
+.modal_comment_header_right span{
+    cursor:pointer;
+}
+
+.not_comment{
+    text-align: center;
+}
+
+.comment_likes {
+    width: 100%;
+    display: flex
+}
+
+.box_comments {
+    height: 370px;
+    overflow-y: scroll;
+}
+
+span.material-symbols-outlined.bookmarks {
+    position: relative;
+    left: 23.5rem;
+    z-index:-1;
+}

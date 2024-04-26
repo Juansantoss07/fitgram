@@ -5,9 +5,8 @@
 {% endblock 'head' %}
 {% block 'body' %}
 
-    <section class='home'>
-        
-       <div class="container_posts">
+<section class='home'>
+    <div class="container_posts">
         {% if messages %}
         <br>
         {% for message in messages %}
@@ -18,6 +17,53 @@
         {% endif %}
         {% if posts %}
         {% for post in posts %}
+            <div class="modal_comment">
+                <div class="modal_comment_container">
+                    <img src="{{post.post_image.url}}" alt="Post Image"/>
+                    <div class="modal_comment_content">
+                        <div class="modal_comment_header_right">
+                            <span class="material-symbols-outlined close_modal_comment">close</span>
+                        </div>
+                        {% if post.comment_set.all %}
+                        <div class="box_comments">
+                        {% for comment in post.comment_set.all %}
+                        <div class="modal_comment_content_comment">
+                            <img src="{{comment.user_comment.foto_perfil.url}}" alt="img-profile"/>
+                            
+                            <p> <b>{{comment.user_comment.username}}</b> {{comment.comment}}</p>
+                        </div>
+                        {% endfor %}
+                        </div>
+
+                        {% else %}
+                        <p class="not_comment">Nenhum comentário ainda 🥲</p>
+                        {% endif %}
+
+                        <div class="comment_likes">
+                            
+                                <form action="{% url "add_like" post.id %}" method="POST">{% csrf_token %}
+                                    <input type="hidden" name="add_likes" value="add_likes"/>
+                                    <button type="submit"><a href="#"><span class="material-symbols-outlined {% for like in post.like_set.all %}{% if like.user_like == request.user %}{{ like.color_icon }}{% endif %}{% endfor %}">favorite</span></a></button>
+                                </form>
+                          
+                            {% if post.like_set.count == 0 %}
+                                <span>sem curtida</span>
+                            {% elif post.like_set.count == 1 %}
+                                <span>{{post.like_set.count}} curtida</span>
+                            {% else %}
+                                <span>{{post.like_set.count}} curtidas</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="comments">
+                            <form action="{% url "add_comment" post.id %}" method="POST"/>{% csrf_token %}
+                                <input type=text placeholder="Adicione um comentário..." name="comment"/>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
             <div class="card_posts">
             <div class="card_posts_header">
                 <img src="{{post.user_post.foto_perfil.url}}" alt="img-profile"/>
@@ -31,7 +77,8 @@
                 <input type="hidden" name="add_likes" value="add_likes"/>
                 <button type="submit"><a href="#"><span class="material-symbols-outlined {% for like in post.like_set.all %}{% if like.user_like == request.user %}{{ like.color_icon }}{% endif %}{% endfor %}">favorite</span></a></button>
                 </form>
-                <a href="#"><span class="material-symbols-outlined">chat_bubble</span></a>
+                <a class="modal_comment_open"><span class="material-symbols-outlined">chat_bubble</span></a>
+                <a><span class="material-symbols-outlined bookmarks">bookmarks</span></a>
             </div>
             {% if post.like_set.count == 0 %}
                 <span>sem curtida</span>
@@ -50,16 +97,18 @@
                     <input type=text placeholder="Adicione um comentário..." name="comment"/>
                 </form>
             </div>
+
         {% endfor %}
         {% else %}
         <p>Nenhum post encontrado</p>
         {% endif %}
-       </div>
-    </section>
+    </div>
+</section>
 {% include  "partials/navbar.html" %}
+    <script src="{% static "publish/js/likes.js" %}"></script>
+    <script src="{% static "publish/js/comments.js" %}"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="{% static "js/scroll_reveal.js" %}"></script>
-    <script src="{% static "publish/js/likes.js" %}"</script>
 {% endblock 'body' %}
 
 
